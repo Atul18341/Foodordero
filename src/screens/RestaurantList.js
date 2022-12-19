@@ -8,20 +8,21 @@ import {
   FlatList,
   SafeAreaView,
   StyleSheet,
+  TouchableOpacity,
   Image,
 } from 'react-native';
 import {signOut} from 'firebase/auth';
 import {auth} from '../firebase/config';
+import {AppContext} from '../../App';
 
-import {Img} from './Images/';
-export default function RestaurantList({navigation}) {
-  const [RestaurantList, setRestaurantList] = useState([]);
+export default function RestaurantList({navigation:{navigate}}) {
+    const [RestaurantList, setRestaurantList] = useState([]);
   const [Location, setLocation] = useState('');
+  const [selectedRestaurantData,setSelectedRestaurantData] = useState([]);
   useEffect(() => {
-    fetch('https://api.npoint.io/c1336d3f8d08ae53247f')
+    fetch('https://atul18341.github.io/Foodordero-json/data.json')
       .then(res => res.json())
       .then(data => setRestaurantList(data));
-    console.log('data in:', RestaurantList);
   }, []);
   const Signout = () => {
     signOut(auth)
@@ -33,11 +34,16 @@ export default function RestaurantList({navigation}) {
       });
   };
   const LocationFilter = (Location) => {
-    RestaurantList.filter((item)=>{
+    const filteredData=RestaurantList.filter((item)=>{
        return item.City == Location;
     })
+  
+    setRestaurantList(filteredData)
  };
- console.log(LocationFilter());
+ let id;
+ const selectedRestaurant =(id)=>{
+ Alert.alert('Id:',id);
+ }
   return (
     <View>
       <Button title="Sign Out" onPress={() => Signout()} />
@@ -46,13 +52,16 @@ export default function RestaurantList({navigation}) {
         value={Location}
         placeholder="Search Restaurant by City"
         style={styles.Searchbar}
-        onChangeText={location=>setLocation(location)}
+        onChangeText={(location)=>{setLocation(location)}}
       />
       <Button title="search" onPress={()=>LocationFilter(Location)}></Button>
       <FlatList
         data={RestaurantList}
         renderItem={({item}) => (
-          <SafeAreaView style={styles.card}>
+    
+          <TouchableOpacity style={styles.card}  onPress={() =>
+            navigate('Restaurant Details', {id: item.Restaurant_ID})
+          }>
             <Image
               source={require('./Images/restaurant.jpg')}
               style={styles.Listimage}
@@ -60,7 +69,7 @@ export default function RestaurantList({navigation}) {
             <Text style={styles.name}>{item.Restaurant_Name}</Text>
             <Text>{item.City}</Text>
             <Text>{item.Rating_text}</Text>
-          </SafeAreaView>
+          </TouchableOpacity>
         )}
       />
     </View>

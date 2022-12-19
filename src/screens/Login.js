@@ -18,7 +18,6 @@ export default function Login({navigation}) {
     signInWithEmailAndPassword(auth, Email, Password)
       .then(userdata => {
         const user = userdata.user;
-        console.log(user);
         Alert.alert('Login', 'Login Successful');
         navigation.replace('Restaurants');
       })

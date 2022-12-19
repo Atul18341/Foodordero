@@ -1,10 +1,12 @@
 
 import { initializeApp } from "firebase/app";
 //import { getAnalytics } from "firebase/analytics";
+import { getDatabase, getdatabase } from "firebase/database";
 import { getAuth } from "firebase/auth";
 const firebaseConfig = {
     apiKey: "AIzaSyBwtwNQlE1qz0uda91jcNNsrcR8YkpvfhY",
     authDomain: "foododero.firebaseapp.com",
+    databaseURL: "https://foododero-default-rtdb.asia-southeast1.firebasedatabase.app",
     projectId: "foododero",
     storageBucket: "foododero.appspot.com",
     messagingSenderId: "571049637902",
@@ -15,5 +17,6 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
+const db = getDatabase(app);
 //const analytics = getAnalytics(app);
-export {auth}
+export {auth,db}
