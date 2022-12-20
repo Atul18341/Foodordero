@@ -18,11 +18,12 @@ import {AppContext} from '../../App';
 export default function RestaurantList({navigation: {navigate}}) {
   const [RestaurantList, setRestaurantList] = useState([]);
   const [Location, setLocation] = useState('');
-  const [selectedRestaurantData, setSelectedRestaurantData] = useState([]);
+  const [NonFilteredList, setNonFilteredList] = useState([]);
   useEffect(() => {
     fetch('https://atul18341.github.io/Foodordero-json/data.json')
       .then(res => res.json())
       .then(data => setRestaurantList(data));
+      setNonFilteredList(RestaurantList);
   }, []);
   const Signout = () => {
     signOut(auth)
@@ -40,10 +41,7 @@ export default function RestaurantList({navigation: {navigate}}) {
 
     setRestaurantList(filteredData);
   };
-  let id;
-  const selectedRestaurant = id => {
-    Alert.alert('Id:', id);
-  };
+  
   return (
     <View>
       <Button title="Sign Out" onPress={() => Signout()} />
@@ -53,7 +51,7 @@ export default function RestaurantList({navigation: {navigate}}) {
         placeholder="Search Restaurant by City"
         style={styles.Searchbar}
         onChangeText={location => {
-          setLocation(location);
+          setLocation(location);setRestaurantList(NonFilteredList);
         }}
       />
       <Button title="search" onPress={() => LocationFilter(Location)}></Button>

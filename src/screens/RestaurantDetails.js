@@ -9,12 +9,17 @@ import {
   TouchableOpacity,
   Button,
 } from 'react-native';
+import { Picker } from '@react-native-picker/picker';
 import { db } from '../firebase/config';
 import { ref,push,update } from 'firebase/database';
+import { isValidTimestamp } from '@firebase/util';
 export default function ResturantDetails({route, navigation}) {
+ 
   const {id} = route.params;
+
   const [FilteredList, setFilteredList] = useState([]);
   const [isVisible, setIsVible] = useState(false);
+  const [CheckRestaurant, setCheckRestaurant] = useState('');
 
   const price = 200;
   useEffect(() => {
@@ -46,6 +51,10 @@ export default function ResturantDetails({route, navigation}) {
       console.log("Error:",e)
     }
    }
+  const pickerItem=()=>{
+    for(var i=1;i<5;i++)
+       return items.push(<Picker.item label={i} value={i}/>);
+   }
   return (
     <SafeAreaView>
        <Image
@@ -66,9 +75,12 @@ export default function ResturantDetails({route, navigation}) {
             <Text style={styles.name}>{item.Restaurant_Name}</Text>
             <Text style={styles.address}>Address: {item.Address}</Text>
             <Text style={styles.menu}>Menu</Text>
+            <SafeAreaView>
             <Text style={styles.menuList}>
               {item.Cuisines} Rs. {price}
             </Text>
+            </SafeAreaView>
+          
            
           </SafeAreaView>
         )}

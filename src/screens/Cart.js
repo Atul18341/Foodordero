@@ -1,7 +1,9 @@
 import React, {useEffect, useState} from 'react';
-import {SafeAreaView, Text, FlatList, Button} from 'react-native';
+import {SafeAreaView, Text, FlatList, Button, Alert} from 'react-native';
 import {db} from '../firebase/config';
 import {ref, onValue, remove} from 'firebase/database';
+import RazorpayCheckout from 'react-native-razorpay';
+
 
 export default function Cart({navigation}) {
   const [CartData, setCartData] = useState([]);
@@ -12,10 +14,37 @@ export default function Cart({navigation}) {
       setCartData(Data);
     });
   };
+
+
  // Function called when user wants to delete any item before placing order
+
   const userRemove = key => {
     remove(ref(db, '/CartData/' + key));
   };
+
+  const Checkout=()=>{
+   
+    var options = {
+        description: 'Order bill',
+        image: '',
+        currency: 'INR',
+        key: 'rzp_test_ihyN942As43mJi',
+        amount: '200',
+        name: 'Foodorder',
+        prefill: {
+          email: 'atulkumar987613@gmail.com',
+          contact: '6205695667',
+          name: 'Atul Kumar'
+        },
+        theme: {color: '#53a20e'}
+      }
+    RazorpayCheckout.open(options).then((data)=>{
+        console.log("Success:",data.razorpay_payment_id);
+        navigation.navigate('Payment')
+    }).catch((error)=>{
+        console.log("Error:",error.description);
+    })
+  }
   useEffect(() => {
     fetchData();
   }, []);
@@ -35,7 +64,7 @@ export default function Cart({navigation}) {
       />
       <Button
         title="Make Payment"
-        onPress={() => navigation.navigate('Payment')}
+        onPress={() => Checkout()}
       />
     </SafeAreaView>
   );
