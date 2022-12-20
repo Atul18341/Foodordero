@@ -15,10 +15,10 @@ import {signOut} from 'firebase/auth';
 import {auth} from '../firebase/config';
 import {AppContext} from '../../App';
 
-export default function RestaurantList({navigation:{navigate}}) {
-    const [RestaurantList, setRestaurantList] = useState([]);
+export default function RestaurantList({navigation: {navigate}}) {
+  const [RestaurantList, setRestaurantList] = useState([]);
   const [Location, setLocation] = useState('');
-  const [selectedRestaurantData,setSelectedRestaurantData] = useState([]);
+  const [selectedRestaurantData, setSelectedRestaurantData] = useState([]);
   useEffect(() => {
     fetch('https://atul18341.github.io/Foodordero-json/data.json')
       .then(res => res.json())
@@ -33,17 +33,17 @@ export default function RestaurantList({navigation:{navigate}}) {
         Alert.alert('Error', error);
       });
   };
-  const LocationFilter = (Location) => {
-    const filteredData=RestaurantList.filter((item)=>{
-       return item.City == Location;
-    })
-  
-    setRestaurantList(filteredData)
- };
- let id;
- const selectedRestaurant =(id)=>{
- Alert.alert('Id:',id);
- }
+  const LocationFilter = Location => {
+    const filteredData = RestaurantList.filter(item => {
+      return item.City == Location;
+    });
+
+    setRestaurantList(filteredData);
+  };
+  let id;
+  const selectedRestaurant = id => {
+    Alert.alert('Id:', id);
+  };
   return (
     <View>
       <Button title="Sign Out" onPress={() => Signout()} />
@@ -52,16 +52,19 @@ export default function RestaurantList({navigation:{navigate}}) {
         value={Location}
         placeholder="Search Restaurant by City"
         style={styles.Searchbar}
-        onChangeText={(location)=>{setLocation(location)}}
+        onChangeText={location => {
+          setLocation(location);
+        }}
       />
-      <Button title="search" onPress={()=>LocationFilter(Location)}></Button>
+      <Button title="search" onPress={() => LocationFilter(Location)}></Button>
       <FlatList
         data={RestaurantList}
         renderItem={({item}) => (
-    
-          <TouchableOpacity style={styles.card}  onPress={() =>
-            navigate('Restaurant Details', {id: item.Restaurant_ID})
-          }>
+          <TouchableOpacity
+            style={styles.card}
+            onPress={() =>
+              navigate('Restaurant Details', {id: item.Restaurant_ID})
+            }>
             <Image
               source={require('./Images/restaurant.jpg')}
               style={styles.Listimage}

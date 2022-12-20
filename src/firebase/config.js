@@ -4,14 +4,14 @@ import { initializeApp } from "firebase/app";
 import { getDatabase, getdatabase } from "firebase/database";
 import { getAuth } from "firebase/auth";
 const firebaseConfig = {
-    apiKey: "AIzaSyBwtwNQlE1qz0uda91jcNNsrcR8YkpvfhY",
-    authDomain: "foododero.firebaseapp.com",
-    databaseURL: "https://foododero-default-rtdb.asia-southeast1.firebasedatabase.app",
-    projectId: "foododero",
-    storageBucket: "foododero.appspot.com",
-    messagingSenderId: "571049637902",
-    appId: "1:571049637902:web:ae62fdedf15382682da45f",
-    measurementId: "G-EJVKDFL2L3"
+  apiKey: "AIzaSyAhOu0427hzkowMdkRQqlJ6XxHj1Y47cQo",
+  authDomain: "foodordero.firebaseapp.com",
+  databaseURL: "https://foodordero-default-rtdb.asia-southeast1.firebasedatabase.app",
+  projectId: "foodordero",
+  storageBucket: "foodordero.appspot.com",
+  messagingSenderId: "1009893541350",
+  appId: "1:1009893541350:web:f1c0ab4325402a39fa8227",
+  measurementId: "G-PVH6PTSFYP"
   };
 
 // Initialize Firebase

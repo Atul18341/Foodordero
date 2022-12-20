@@ -19,7 +19,7 @@ export default function Register({navigation}) {
       .then(userdata => {
         const user = userdata.user;
         Alert.alert('Registration', 'You have been registered successfully.');
-        navigation.replace('Login page');
+        navigation.replace('Login Page');
       })
       .catch(error => {
         const errorCode = error.code;
