@@ -1,10 +1,10 @@
 import React, {useEffect, useState} from 'react';
-import {SafeAreaView, Text, FlatList, Button, Alert} from 'react-native';
+import {SafeAreaView, Text, FlatList, Button, Alert,StyleSheet} from 'react-native';
 import {db} from '../firebase/config';
 import {ref, onValue, remove} from 'firebase/database';
 import RazorpayCheckout from 'react-native-razorpay';
-
-
+import  Icon  from 'react-native-vector-icons/Ionicons';
+import { styles } from './styles';
 export default function Cart({navigation}) {
   const [CartData, setCartData] = useState([]);
 
@@ -49,23 +49,28 @@ export default function Cart({navigation}) {
     fetchData();
   }, []);
   return (
+    <>
     <SafeAreaView>
-      <Text>Cart Page</Text>
       <FlatList
+      contentContainerStyle={{marginBottom: 50, paddingTop: 8}}
         data={CartData}
         renderItem={({item}) => (
-          <SafeAreaView>
-            <Button title="Remove" onPress={() => userRemove(item.Key)} />
+          <SafeAreaView style={styles.CartCard}>
+            <Icon name='close'size={20} style={styles.CartCardIcon} onPress={() => userRemove(item.Key)} />
             <Text>{item.Item}</Text>
             <Text>Restaurant: {item.Restaurant}</Text>
             <Text>Rs.{item.Price}</Text>
+           
           </SafeAreaView>
         )}
       />
-      <Button
-        title="Make Payment"
+    </SafeAreaView>
+    <SafeAreaView style={styles.BottomButtonView}>
+    <Button style={styles.Button}
+        title="Make Payment" 
         onPress={() => Checkout()}
       />
     </SafeAreaView>
+    </>
   );
 }

@@ -13,7 +13,7 @@ import {
 } from 'react-native';
 import {signOut} from 'firebase/auth';
 import {auth} from '../firebase/config';
-import {AppContext} from '../../App';
+import Icon  from 'react-native-vector-icons/Ionicons';
 
 export default function RestaurantList({navigation: {navigate}}) {
   const [RestaurantList, setRestaurantList] = useState([]);
@@ -45,16 +45,17 @@ export default function RestaurantList({navigation: {navigate}}) {
   return (
     <View>
       <Button title="Sign Out" onPress={() => Signout()} />
-      <Text>Restaurant Page</Text>
+      <View>
       <TextInput
         value={Location}
         placeholder="Search Restaurant by City"
         style={styles.Searchbar}
         onChangeText={location => {
-          setLocation(location);setRestaurantList(NonFilteredList);
+          setLocation(location);
         }}
       />
-      <Button title="search" onPress={() => LocationFilter(Location)}></Button>
+      <Icon name="search-circle" size={40} color="black" />
+      </View>
       <FlatList
         data={RestaurantList}
         renderItem={({item}) => (
@@ -67,7 +68,7 @@ export default function RestaurantList({navigation: {navigate}}) {
               source={require('./Images/restaurant.jpg')}
               style={styles.Listimage}
             />
-            <Text style={styles.name}>{item.Restaurant_Name}</Text>
+            <Text style={styles.RestaurantName}>{item.Restaurant_Name}</Text>
             <Text>{item.City}</Text>
             <Text>{item.Rating_text}</Text>
           </TouchableOpacity>
@@ -91,7 +92,7 @@ const styles = StyleSheet.create({
     padding: 10,
     margin: 2,
   },
-  name: {
+  RestaurantName: {
     fontSize: 24,
     fontWeight: 'bold',
   },

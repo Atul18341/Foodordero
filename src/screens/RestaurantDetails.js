@@ -9,12 +9,11 @@ import {
   TouchableOpacity,
   Button,
 } from 'react-native';
-import { Picker } from '@react-native-picker/picker';
-import { db } from '../firebase/config';
-import { ref,push,update } from 'firebase/database';
-import { isValidTimestamp } from '@firebase/util';
+import {Picker} from '@react-native-picker/picker';
+import {db} from '../firebase/config';
+import {ref, push, update} from 'firebase/database';
+import { styles } from './styles';
 export default function ResturantDetails({route, navigation}) {
- 
   const {id} = route.params;
 
   const [FilteredList, setFilteredList] = useState([]);
@@ -32,90 +31,70 @@ export default function ResturantDetails({route, navigation}) {
         return item.Restaurant_ID == id;
       });
       setFilteredList(filteredData);
-       //console.log("menus:",FilteredList[0].Cuisines);
+      //console.log("menus:",FilteredList[0].Cuisines);
     };
   }, []);
   //const menus=FilteredList[0].Cuisines.split(',')
-  const CartData=(name,Cuisines,amount)=>{
-    const Restaurant =name.Name;
+  const CartData = (name, Cuisines, amount) => {
+    const Restaurant = name.Name;
     const Item = Cuisines.Item;
-    const Price =amount.Price;
-    console.log("Item:",Item); 
-    try{
+    const Price = amount.Price;
+    console.log('Item:', Item);
+    try {
       const key = push(ref(db, '/cart/')).key;
-      const data = {Key:key,Restaurant,Item,Price};
+      const data = {Key: key, Restaurant, Item, Price};
       const updates = {};
       updates['/CartData/' + key] = data;
       update(ref(db), updates);
-    }catch(e){
-      console.log("Error:",e)
+    } catch (e) {
+      console.log('Error:', e);
     }
-   }
-  const pickerItem=()=>{
-    for(var i=1;i<5;i++)
-       return items.push(<Picker.item label={i} value={i}/>);
-   }
+  };
+  const pickerItem = () => {
+    for (var i = 1; i < 5; i++)
+      return items.push(<Picker.item label={i} value={i} />);
+  };
   return (
-    <SafeAreaView>
-       <Image
-              source={require('./Images/restaurant.jpg')}
-              style={styles.img}
-            />
-      <FlatList
-        data={FilteredList}
-        renderItem={({item}) => (
-          <SafeAreaView
-            style={{flex: 1}}
-            onStartShouldSetResponder={() => {
-              setIsVible(true);
-              Alert.alert('Confirmation', 'Successfully added to cart.');
-              CartData({Name:item.Restaurant_Name},{Item:item.Cuisines},{Price:price})
-            }}>
-           
-            <Text style={styles.name}>{item.Restaurant_Name}</Text>
-            <Text style={styles.address}>Address: {item.Address}</Text>
-            <Text style={styles.menu}>Menu</Text>
-            <SafeAreaView>
-            <Text style={styles.menuList}>
-              {item.Cuisines} Rs. {price}
-            </Text>
+    <>
+      <SafeAreaView>
+        <Image source={require('./Images/restaurant.jpg')} style={styles.img} />
+        <FlatList
+          data={FilteredList}
+          renderItem={({item}) => (
+            <SafeAreaView
+              style={{flex: 1}}
+              onStartShouldSetResponder={() => {
+                setIsVible(true);
+                Alert.alert('Confirmation', 'Successfully added to cart.');
+                CartData(
+                  {Name: item.Restaurant_Name},
+                  {Item: item.Cuisines},
+                  {Price: price},
+                );
+              }}>
+              <Text style={styles.name}>{item.Restaurant_Name}</Text>
+              <Text style={styles.address}>Address: {item.Address}</Text>
+              <Text style={styles.menu}>Menu</Text>
+              <SafeAreaView>
+                <Text style={styles.menuList}>
+                  {item.Cuisines} Rs. {price}
+                </Text>
+              </SafeAreaView>
             </SafeAreaView>
-          
-           
-          </SafeAreaView>
-        )}
-      />
-      {isVisible && (
-        <Button
-          style={styles.cartButton}
-          title="Go to Cart"
-          onPress={() => navigation.navigate('My Cart')}
+          )}
         />
-      )}
-    </SafeAreaView>
+      </SafeAreaView>
+
+      <SafeAreaView style={styles.BottomButtonView}>
+        {isVisible && (
+          <Button
+            style={styles.Button}
+            title="Go to Cart"
+            onPress={() => navigation.navigate('My Cart')}
+          />
+        )}
+      </SafeAreaView>
+    </>
   );
 }
 
-const styles = StyleSheet.create({
-  name: {
-    fontSize: 30,
-    fontWeight: 'bold',
-    marginLeft: 10,
-    marginTop: 10,
-    color: 'black',
-  },
-  address: {marginLeft: 15, fontSize: 18},
-  img: {height: 200, marginTop: 10, borderRadius: 5},
-  menu: {borderBottomWidth: 1, margin: 20, fontSize: 24, fontWeight: 'bold'},
-  menuList: {
-    marginLeft: 25,
-    marginRight: 25,
-    borderWidth: 1,
-    padding: 10,
-    borderRadius: 10,
-    fontSize: 18,
-    flex: 1,
-    justifyContent: 'space-between',
-  },
-  cartButton: {flex: 1, justifyContent: 'flex-end'},
-});
