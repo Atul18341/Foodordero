@@ -40,7 +40,7 @@ export default function Cart({navigation}) {
       }
     RazorpayCheckout.open(options).then((data)=>{
         console.log("Success:",data.razorpay_payment_id);
-        navigation.navigate('Payment')
+        navigation.navigate('Order CheckOut')
     }).catch((error)=>{
         console.log("Error:",error.description);
     })

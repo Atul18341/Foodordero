@@ -2,8 +2,10 @@ import React, {useState} from 'react';
 import {SafeAreaView, Text, Button, Alert} from 'react-native';
 import {db} from '../firebase/config';
 import {ref, onValue, push, remove} from 'firebase/database';
-import { styles } from './styles';
-export default function Payment({navigation}) {
+import {styles} from './styles';
+import Icon from 'react-native-vector-icons/Feather';
+
+export default function OrderChecKOut({navigation}) {
   const [isVisible, setIsVible] = useState(false);
   const [CartData, setCartData] = useState([]);
   const handleOrderPlaced = () => {
@@ -25,19 +27,21 @@ export default function Payment({navigation}) {
 
   return (
     <>
-    <SafeAreaView>
-      <Text>Payment succesful.</Text>
-      <Button title="Place Order" onPress={() => handleOrderPlaced()} />
-     
-    </SafeAreaView>
-    <SafeAreaView style={styles.BottomButtonView}>
-    {isVisible && (
-        <Button
-          title="Track Order"
-          onPress={() => navigation.navigate('Track Order')}
-        />
-      )}
-    </SafeAreaView>
+      <SafeAreaView style={styles.ChecKOutView}>
+        <SafeAreaView style={{flexDirection: 'row'}}>
+          <Icon name="check-circle" size={40} color="green" />
+          <Text style={styles.SuccessfulText}>Payment Successful.</Text>
+        </SafeAreaView>
+        <Button title="Checkout" onPress={() => handleOrderPlaced()} />
+      </SafeAreaView>
+      <SafeAreaView style={styles.BottomButtonView}>
+        {isVisible && (
+          <Button
+            title="Track Order"
+            onPress={() => navigation.navigate('Track Order')}
+          />
+        )}
+      </SafeAreaView>
     </>
   );
 }

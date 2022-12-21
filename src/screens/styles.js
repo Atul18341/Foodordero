@@ -1,8 +1,42 @@
 import {StyleSheet} from 'react-native';
 
 const styles = StyleSheet.create({
-  CartCard: {borderWidth: 2, borderRadius: 10, margin: 5, padding: 10},
-  CartCardIcon: {flex: 1, marginLeft: 330},
+  //Styles for All Icons
+
+  PageIcon: {marginLeft: 10},
+  ProfileIcon: {marginRight: 10},
+
+  // Styles for Login Page
+  main: {flex: 1, alignItems: 'center',justifyContent:'center'},
+  heading: {fontWeight: 'bold', fontSize: 24, color: '#282A3A'},
+  inputField: {borderWidth: 1, width: 300, borderRadius: 10, margin: 10},
+  submitButton: {backgroundColor: '#00ADB5', alignItems: 'center', padding: 10},
+  buttonText: {fontWeight: 'bold', fontSize: 18},
+
+  // Styles for Restaurant List Page
+  SearchBarView: {flexDirection: 'row', margin: 10},
+  Searchbar: {
+    borderWidth: 1,
+    borderRadius: 10,
+    margin: 5,
+    width: 320,
+    height: 40,
+  },
+  card: {
+    borderWidth: 1,
+    borderRadius: 5,
+    height: 200,
+    padding: 10,
+    margin: 2,
+  },
+  RestaurantName: {
+    fontSize: 24,
+    fontWeight: 'bold',
+  },
+  Listimage: {
+    width: 360,
+    height: 100,
+  },
 
   // Styles For Restaurant Details Page
   name: {
@@ -27,14 +61,22 @@ const styles = StyleSheet.create({
   },
   cartButton: {flex: 1, justifyContent: 'flex-end'},
 
-// Common Style for Button at Bottom on All Pages
+  // Style for Cart Page
+
+  CartCard: {borderWidth: 2, borderRadius: 10, margin: 5, padding: 10},
+  CartCardIcon: {flex: 1, marginLeft: 330},
+
+ // Styles for Order CheckOut Page
+ ChecKOutView:{flex:1,justifyContent:'center',alignItems:'center'},
+ SuccessfulText:{fontSize:25,color:'green',fontWeight:'bold'},
+  // Common Style for Button at Bottom on All Pages
   BottomButtonView: {
     right: 10,
     left: 10,
     position: 'absolute',
     bottom: 10,
   },
-  Button:{borderRadius:10,height:20,marginTop:50}
+  Button: {borderRadius: 10, height: 20, marginTop: 50},
 });
 
 export {styles};

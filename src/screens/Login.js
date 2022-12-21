@@ -7,6 +7,7 @@ import {
   TextInput,
   Alert,
 } from 'react-native';
+import { styles } from './styles';
 import {signInWithEmailAndPassword} from 'firebase/auth';
 import {auth} from '../firebase/config';
 
@@ -47,18 +48,10 @@ export default function Login({navigation}) {
           <Text style={styles.buttonText}>Login</Text>
         </TouchableOpacity>
         <Text></Text>
-        <TouchableOpacity onPress={() => navigation.navigate('Register Page')}>
-          <Text>Didn't have account? Register</Text>
-        </TouchableOpacity>
       </View>
+      <TouchableOpacity onPress={() => navigation.navigate('Register Page')}>
+          <Text style={styles.buttonBottomText}>Didn't have account? Register</Text>
+        </TouchableOpacity>
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  main: {flex: 1, alignItems: 'center'},
-  heading: {fontWeight: 'bold', fontSize: 24, color: '#282A3A'},
-  inputField: {borderWidth: 1, width: 300, borderRadius: 10, margin: 10},
-  submitButton: {backgroundColor: '#00ADB5', alignItems: 'center', padding: 10},
-  buttonText: {fontWeight: 'bold', fontSize: 18},
-});

@@ -7,6 +7,7 @@ import {
   TextInput,
   Alert,
 } from 'react-native';
+import { styles } from './styles';
 import {createUserWithEmailAndPassword} from 'firebase/auth';
 import {auth} from '../firebase/config';
 
@@ -46,19 +47,11 @@ export default function Register({navigation}) {
         <TouchableOpacity style={styles.submitButton} onPress={handleSubmit}>
           <Text style={styles.buttonText}>Register</Text>
         </TouchableOpacity>
-        <Text>Already have account?</Text>
-        <TouchableOpacity onPress={() => navigation.navigate('Login Page')}>
-          <Text>Login</Text>
-        </TouchableOpacity>
       </View>
+      <TouchableOpacity onPress={() => navigation.navigate('Login Page')}>
+          <Text>Already have account? Login</Text>
+        </TouchableOpacity>
     </View>
   );
 }
 
-const styles = StyleSheet.create({
-  main: {flex: 1, alignItems: 'center'},
-  heading: {fontWeight: 'bold', fontSize: 24, color: '#282A3A'},
-  inputField: {borderWidth: 1, width: 300, borderRadius: 10, margin: 10},
-  submitButton: {backgroundColor: '#00ADB5', alignItems: 'center', padding: 10},
-  buttonText: {fontWeight: 'bold', fontSize: 18},
-});
