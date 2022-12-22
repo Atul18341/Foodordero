@@ -52,7 +52,6 @@ export default function Cart({navigation}) {
     <>
     <SafeAreaView>
       <FlatList
-      contentContainerStyle={{marginBottom: 50, paddingTop: 8}}
         data={CartData}
         renderItem={({item}) => (
           <SafeAreaView style={styles.CartCard}>
@@ -68,7 +67,7 @@ export default function Cart({navigation}) {
     <SafeAreaView style={styles.BottomButtonView}>
     <Button style={styles.Button}
         title="Make Payment" 
-        onPress={() => Checkout()}
+        onPress={() => navigation.navigate('Order CheckOut')}
       />
     </SafeAreaView>
     </>

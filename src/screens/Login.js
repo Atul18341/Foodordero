@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState,useEffect} from 'react';
 import {
   View,
   Text,
@@ -14,7 +14,7 @@ import {auth} from '../firebase/config';
 export default function Login({navigation}) {
   const [Email, setEmail] = useState('');
   const [Password, setPassword] = useState('');
-
+  
   const handleSubmit = () => {
     signInWithEmailAndPassword(auth, Email, Password)
       .then(userdata => {

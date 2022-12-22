@@ -15,12 +15,20 @@ export default function OrderChecKOut({navigation}) {
     );
     onValue(ref(db, '/CartData/'), querySnapshot => {
       let Data = Object.values(querySnapshot.val() || {});
-      setCartData(Data);
+    setCartData(Data);
+    console.log("Order data:",Data)
     });
-    push(ref(db, '/OrderHistory/'), {
-      CartData,
-      Order_Time: new Date().toLocaleString(),
-    });
+    console.log("Cart Data:",CartData);
+    CartData.forEach((data)=>{
+      push(ref(db, '/OrderHistory/'), {
+        Item:data.Item,
+        Restaurant:data.Restaurant,
+        Price:data.Price,
+        Order_Time: new Date().toLocaleString(),
+        Status:'Order Placed'
+      });
+    })
+   //remove(ref(db,'/CartData/'));
     setIsVible(true);
     console.log('Current Date:', new Date().toLocaleString());
   };
@@ -37,11 +45,12 @@ export default function OrderChecKOut({navigation}) {
       <SafeAreaView style={styles.BottomButtonView}>
         {isVisible && (
           <Button
-            title="Track Order"
-            onPress={() => navigation.navigate('Track Order')}
-          />
+            title="Go to Order History"
+            onPress={() =>
+              navigation.navigate('Order History')
+            }/>
         )}
       </SafeAreaView>
     </>
-  );
+  );s
 }

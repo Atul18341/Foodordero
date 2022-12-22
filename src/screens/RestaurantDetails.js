@@ -18,7 +18,7 @@ export default function ResturantDetails({route, navigation}) {
 
   const [FilteredList, setFilteredList] = useState([]);
   const [isVisible, setIsVible] = useState(false);
-  const [CheckRestaurant, setCheckRestaurant] = useState('');
+  const [CheckRestaurant, setCheckRestaurant] = useState();
 
   const price = 200;
   useEffect(() => {
@@ -39,9 +39,13 @@ export default function ResturantDetails({route, navigation}) {
     const Restaurant = name.Name;
     const Item = Cuisines.Item;
     const Price = amount.Price;
-    console.log('Item:', Item);
+
+    console.log(':', Restaurant);
     try {
-      const key = push(ref(db, '/cart/')).key;
+      setCheckRestaurant(Restaurant);
+      console.log('After submitting:',CheckRestaurant);
+
+      const key = push(ref(db, '/CartData/')).key;
       const data = {Key: key, Restaurant, Item, Price};
       const updates = {};
       updates['/CartData/' + key] = data;
@@ -70,7 +74,7 @@ export default function ResturantDetails({route, navigation}) {
                   {Name: item.Restaurant_Name},
                   {Item: item.Cuisines},
                   {Price: price},
-                );
+                );setCheckRestaurant({restaurant:item.Restaurant_Name})
               }}>
               <Text style={styles.name}>{item.Restaurant_Name}</Text>
               <Text style={styles.address}>Address: {item.Address}</Text>

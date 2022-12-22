@@ -6,8 +6,11 @@ const styles = StyleSheet.create({
   PageIcon: {marginLeft: 10},
   ProfileIcon: {marginRight: 10},
 
+  //Styles for Splash Screen
+  SplashScreenView: {flex: 1, justifyContent: 'center', alignItems: 'center'},
+  SplashImage: {width: 150, height: 150},
   // Styles for Login Page
-  main: {flex: 1, alignItems: 'center',justifyContent:'center'},
+  main: {flex: 1, alignItems: 'center', justifyContent: 'center'},
   heading: {fontWeight: 'bold', fontSize: 24, color: '#282A3A'},
   inputField: {borderWidth: 1, width: 300, borderRadius: 10, margin: 10},
   submitButton: {backgroundColor: '#00ADB5', alignItems: 'center', padding: 10},
@@ -66,9 +69,12 @@ const styles = StyleSheet.create({
   CartCard: {borderWidth: 2, borderRadius: 10, margin: 5, padding: 10},
   CartCardIcon: {flex: 1, marginLeft: 330},
 
- // Styles for Order CheckOut Page
- ChecKOutView:{flex:1,justifyContent:'center',alignItems:'center'},
- SuccessfulText:{fontSize:25,color:'green',fontWeight:'bold'},
+  // Styles for Order CheckOut Page
+  ChecKOutView: {flex: 1, justifyContent: 'center', alignItems: 'center'},
+  SuccessfulText: {fontSize: 25, color: 'green', fontWeight: 'bold'},
+
+  // Styles for Order History page
+  TrackButton: {flex: 1, alignItems: 'center'},
   // Common Style for Button at Bottom on All Pages
   BottomButtonView: {
     right: 10,
