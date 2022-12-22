@@ -12,7 +12,7 @@ import {
 import {Picker} from '@react-native-picker/picker';
 import {db} from '../firebase/config';
 import {ref, push, update} from 'firebase/database';
-import { styles } from './styles';
+import {styles} from './styles';
 export default function ResturantDetails({route, navigation}) {
   const {id} = route.params;
 
@@ -43,7 +43,7 @@ export default function ResturantDetails({route, navigation}) {
     console.log(':', Restaurant);
     try {
       setCheckRestaurant(Restaurant);
-      console.log('After submitting:',CheckRestaurant);
+      console.log('After submitting:', CheckRestaurant);
 
       const key = push(ref(db, '/CartData/')).key;
       const data = {Key: key, Restaurant, Item, Price};
@@ -74,7 +74,8 @@ export default function ResturantDetails({route, navigation}) {
                   {Name: item.Restaurant_Name},
                   {Item: item.Cuisines},
                   {Price: price},
-                );setCheckRestaurant({restaurant:item.Restaurant_Name})
+                );
+                setCheckRestaurant({restaurant: item.Restaurant_Name});
               }}>
               <Text style={styles.name}>{item.Restaurant_Name}</Text>
               <Text style={styles.address}>Address: {item.Address}</Text>
@@ -101,4 +102,3 @@ export default function ResturantDetails({route, navigation}) {
     </>
   );
 }
-

@@ -1,4 +1,3 @@
-
 import React, {useState, useEffect} from 'react';
 import {
   Text,
@@ -11,9 +10,8 @@ import {
   Image,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
-import { styles } from './styles';
-import { createDrawerNavigator } from '@react-navigation/drawer';
-
+import {styles} from './styles';
+import {createDrawerNavigator} from '@react-navigation/drawer';
 
 import TrackOrder from './TrackOrder';
 
@@ -28,7 +26,7 @@ export default function RestaurantList({navigation: {navigate}}) {
       .then(data => setRestaurantList(data));
     setNonFilteredList(RestaurantList);
   }, []);
-  
+
   const LocationFilter = Location => {
     const filteredData = RestaurantList.filter(item => {
       return item.City == Location;
@@ -48,7 +46,12 @@ export default function RestaurantList({navigation: {navigate}}) {
             setLocation(location);
           }}
         />
-        <Icon name="search-circle" size={47} color="black" onPress={()=>LocationFilter(Location)}/>
+        <Icon
+          name="search-circle"
+          size={47}
+          color="black"
+          onPress={() => LocationFilter(Location)}
+        />
       </SafeAreaView>
       <FlatList
         data={RestaurantList}
@@ -68,13 +71,11 @@ export default function RestaurantList({navigation: {navigate}}) {
           </TouchableOpacity>
         )}
       />
-    {/*   Navigation Drawer Code */}
-    
+      {/*   Navigation Drawer Code */}
+
       <Drawer.Navigator>
-       <Drawer.Screen name="Track Order" component={TrackOrder} />
+        <Drawer.Screen name="Track Order" component={TrackOrder} />
       </Drawer.Navigator>
     </SafeAreaView>
-    
   );
 }
-

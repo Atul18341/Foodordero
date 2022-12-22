@@ -15,20 +15,20 @@ export default function OrderChecKOut({navigation}) {
     );
     onValue(ref(db, '/CartData/'), querySnapshot => {
       let Data = Object.values(querySnapshot.val() || {});
-        setOrdersData(Data);
-    console.log("Order data:",Data)
+      setOrdersData(Data);
+      console.log('Order data:', Data);
     });
-    console.log("Cart Data:",OrdersData);
-    OrdersData.forEach((data)=>{
+    console.log('Cart Data:', OrdersData);
+    OrdersData.forEach(data => {
       push(ref(db, '/OrderHistory/'), {
-        Item:data.Item,
-        Restaurant:data.Restaurant,
-        Price:data.Price,
+        Item: data.Item,
+        Restaurant: data.Restaurant,
+        Price: data.Price,
         Order_Time: new Date().toLocaleString(),
-        Status:'Order Placed'
+        Status: 'Order Placed',
       });
-    })
-   //remove(ref(db,'/CartData/'));
+    });
+    //remove(ref(db,'/CartData/'));
     setIsVible(true);
     console.log('Current Date:', new Date().toLocaleString());
   };
@@ -46,11 +46,11 @@ export default function OrderChecKOut({navigation}) {
         {isVisible && (
           <Button
             title="Go to Order History"
-            onPress={() =>
-              navigation.navigate('Order History')
-            }/>
+            onPress={() => navigation.navigate('Order History')}
+          />
         )}
       </SafeAreaView>
     </>
-  );s
+  );
+  s;
 }

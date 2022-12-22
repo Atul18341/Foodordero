@@ -7,7 +7,7 @@ import {
   TextInput,
   Alert,
 } from 'react-native';
-import { styles } from './styles';
+import {styles} from './styles';
 import {createUserWithEmailAndPassword} from 'firebase/auth';
 import {auth} from '../firebase/config';
 
@@ -49,9 +49,8 @@ export default function Register({navigation}) {
         </TouchableOpacity>
       </View>
       <TouchableOpacity onPress={() => navigation.navigate('Login Page')}>
-          <Text>Already have account? Login</Text>
-        </TouchableOpacity>
+        <Text>Already have account? Login</Text>
+      </TouchableOpacity>
     </View>
   );
 }
-

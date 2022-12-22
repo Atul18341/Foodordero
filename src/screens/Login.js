@@ -1,4 +1,4 @@
-import React, {useState,useEffect} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   View,
   Text,
@@ -7,14 +7,14 @@ import {
   TextInput,
   Alert,
 } from 'react-native';
-import { styles } from './styles';
+import {styles} from './styles';
 import {signInWithEmailAndPassword} from 'firebase/auth';
 import {auth} from '../firebase/config';
 
 export default function Login({navigation}) {
   const [Email, setEmail] = useState('');
   const [Password, setPassword] = useState('');
-  
+
   const handleSubmit = () => {
     signInWithEmailAndPassword(auth, Email, Password)
       .then(userdata => {
@@ -25,7 +25,7 @@ export default function Login({navigation}) {
       .catch(error => {
         const errorCode = error.code;
         const errorMessage = error.message;
-        Alert.alert("Error",errorMessage);
+        Alert.alert('Error', errorMessage);
       });
   };
   return (
@@ -50,8 +50,10 @@ export default function Login({navigation}) {
         <Text></Text>
       </View>
       <TouchableOpacity onPress={() => navigation.navigate('Register Page')}>
-          <Text style={styles.buttonBottomText}>Didn't have account? Register</Text>
-        </TouchableOpacity>
+        <Text style={styles.buttonBottomText}>
+          Didn't have account? Register
+        </Text>
+      </TouchableOpacity>
     </View>
   );
 }
