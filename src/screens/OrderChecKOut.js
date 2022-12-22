@@ -7,7 +7,7 @@ import Icon from 'react-native-vector-icons/Feather';
 
 export default function OrderChecKOut({navigation}) {
   const [isVisible, setIsVible] = useState(false);
-  const [CartData, setCartData] = useState([]);
+  const [OrdersData, setOrdersData] = useState([]);
   const handleOrderPlaced = () => {
     Alert.alert(
       'Confirmation',
@@ -15,11 +15,11 @@ export default function OrderChecKOut({navigation}) {
     );
     onValue(ref(db, '/CartData/'), querySnapshot => {
       let Data = Object.values(querySnapshot.val() || {});
-    setCartData(Data);
+        setOrdersData(Data);
     console.log("Order data:",Data)
     });
-    console.log("Cart Data:",CartData);
-    CartData.forEach((data)=>{
+    console.log("Cart Data:",OrdersData);
+    OrdersData.forEach((data)=>{
       push(ref(db, '/OrderHistory/'), {
         Item:data.Item,
         Restaurant:data.Restaurant,

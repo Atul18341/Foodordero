@@ -74,7 +74,8 @@ const styles = StyleSheet.create({
   SuccessfulText: {fontSize: 25, color: 'green', fontWeight: 'bold'},
 
   // Styles for Order History page
-  TrackButton: {flex: 1, alignItems: 'center'},
+  TrackButton: {flex: 1, alignItems: 'center',backgroundColor:'aqua',marginTop:10,padding:10},
+
   // Common Style for Button at Bottom on All Pages
   BottomButtonView: {
     right: 10,
